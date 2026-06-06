@@ -142,16 +142,18 @@
       background: linear-gradient(160deg, rgba(244,73,0,.10), rgba(255,255,255,.04));
       border: 1px solid rgba(244,73,0,.18);
       display: flex; flex-direction: column; gap: 20px;
+      position: relative; overflow: hidden;
     }
     .profile-avatar {
       width: 72px; height: 72px; border-radius: 50%;
       background: linear-gradient(135deg, var(--orange), #ff9467);
       display: flex; align-items: center; justify-content: center;
       font-size: 28px; font-family: 'Degular Display', sans-serif; font-weight: 700; color: white;
+      position: relative; z-index: 2;
     }
-    .profile-name { font-family: 'Degular Display', 'Inter Display', sans-serif; font-size: 28px; font-weight: 400; color: white; margin-bottom: 4px; }
-    .profile-role { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--orange); }
-    .profile-items { display: grid; gap: 14px; }
+    .profile-name { font-family: 'Degular Display', 'Inter Display', sans-serif; font-size: 28px; font-weight: 400; color: white; margin-bottom: 4px; position: relative; z-index: 2; }
+    .profile-role { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--orange); position: relative; z-index: 2; }
+    .profile-items { display: grid; gap: 14px; position: relative; z-index: 2; }
     .profile-item { display: flex; gap: 14px; align-items: flex-start; }
     .profile-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); margin-top: 8px; flex: 0 0 auto; }
     .profile-item p { font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.78); max-width: none; }
@@ -219,6 +221,18 @@
 
     .mobile-nav { display: none; }
 
+    /* ───── Illustration system ───── */
+    .slide-visual { position: absolute; z-index: 1; pointer-events: none; }
+    .hero-content  { max-width: 58%; position: relative; z-index: 2; }
+    .cta-content   { max-width: 62%; position: relative; z-index: 2; }
+
+    /* Neural network node pulse */
+    @keyframes nn-beat  { 0%,100%{opacity:1}   50%{opacity:0.55} }
+    @keyframes nn-beat2 { 0%,100%{opacity:0.85} 50%{opacity:0.4}  }
+    .slide.active .nn-a { animation: nn-beat  2.8s ease-in-out infinite; }
+    .slide.active .nn-b { animation: nn-beat  2.8s ease-in-out infinite 1.4s; }
+    .slide.active .nn-c { animation: nn-beat2 3.5s ease-in-out infinite 0.7s; }
+
     @media screen and (max-width: 900px) {
       html, body { overflow: hidden; }
       .presentation { width: 100vw; height: 100dvh; }
@@ -235,6 +249,8 @@
       .dot { width: 11px; height: 11px; }
       .mobile-nav { display: flex; position: fixed; left: 16px; right: 16px; bottom: 14px; z-index: 1000; justify-content: space-between; pointer-events: none; }
       .mobile-nav button { pointer-events: auto; border: 1px solid rgba(255,255,255,.14); background: rgba(20,18,19,.72); color: white; border-radius: 999px; padding: 10px 16px; font-size: 13px; backdrop-filter: blur(8px); }
+      .slide-visual { display: none !important; }
+      .hero-content, .cta-content { max-width: 100%; }
     }
 
     @media print {
@@ -248,22 +264,102 @@
 <body>
 <div class="presentation">
 
-  <!-- SLIDE 1: Cover -->
+  <!-- ══ SLIDE 1: Cover — AI Neural Network ══ -->
   <section class="slide dark hero active" data-slide="0">
     <div class="watermark">WACHSTUMSCOACH · LUKAS EBNER · 2026</div>
     <div class="page-no">01</div>
-    <div class="label animate">Ihr Wachstumshebel</div>
-    <div class="display animate">KI im Unternehmen<span class="lbr accent">einführen — richtig.</span></div>
-    <h2 class="animate">Wie Lukas Ebner inhabergeführte Unternehmen und Startups dabei begleitet, Künstliche Intelligenz strategisch, sicher und wirksam einzusetzen.</h2>
-    <div class="hero-tags animate">
-      <div class="tag">Strategie &amp; Roadmap</div>
-      <div class="tag">Pilotprojekte</div>
-      <div class="tag">Team-Befähigung</div>
-      <div class="tag">Governance &amp; DSGVO</div>
+
+    <div class="hero-content">
+      <div class="label animate">Ihr Wachstumshebel</div>
+      <div class="display animate">KI im Unternehmen<span class="lbr accent">einführen — richtig.</span></div>
+      <h2 class="animate">Wie Lukas Ebner inhabergeführte Unternehmen und Startups dabei begleitet, Künstliche Intelligenz strategisch, sicher und wirksam einzusetzen.</h2>
+      <div class="hero-tags animate">
+        <div class="tag">Strategie &amp; Roadmap</div>
+        <div class="tag">Pilotprojekte</div>
+        <div class="tag">Team-Befähigung</div>
+        <div class="tag">Governance &amp; DSGVO</div>
+      </div>
+    </div>
+
+    <!-- Neural Network Illustration -->
+    <div class="slide-visual" style="right:2%;top:50%;transform:translateY(-50%);width:37%;max-width:450px;opacity:0.88;">
+      <svg width="450" height="420" viewBox="0 0 450 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <filter id="glow-sm" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow-lg" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="10" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <radialGradient id="node-hot" cx="40%" cy="30%" r="65%">
+            <stop offset="0%" stop-color="#ff7340"/>
+            <stop offset="100%" stop-color="#F44900"/>
+          </radialGradient>
+        </defs>
+        <!-- depth halos -->
+        <circle cx="225" cy="210" r="185" fill="none" stroke="rgba(244,73,0,0.04)" stroke-width="1.5"/>
+        <circle cx="225" cy="210" r="130" fill="none" stroke="rgba(244,73,0,0.06)" stroke-width="1.5"/>
+        <circle cx="225" cy="210" r="75"  fill="none" stroke="rgba(244,73,0,0.09)" stroke-width="1"/>
+        <!-- background connections -->
+        <line x1="50" y1="75"  x2="152" y2="48"  stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+        <line x1="50" y1="75"  x2="152" y2="300" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <line x1="50" y1="75"  x2="152" y2="368" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+        <line x1="50" y1="210" x2="152" y2="48"  stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <line x1="50" y1="210" x2="152" y2="368" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <line x1="50" y1="345" x2="152" y2="48"  stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+        <line x1="50" y1="345" x2="152" y2="132" stroke="rgba(244,73,0,0.10)"   stroke-width="0.8"/>
+        <line x1="50" y1="345" x2="152" y2="368" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+        <line x1="162" y1="48"  x2="268" y2="82"  stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+        <line x1="162" y1="48"  x2="268" y2="370" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+        <line x1="162" y1="300" x2="268" y2="82"  stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <line x1="162" y1="300" x2="268" y2="290" stroke="rgba(244,73,0,0.12)"   stroke-width="0.8"/>
+        <line x1="162" y1="368" x2="268" y2="180" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <line x1="162" y1="368" x2="268" y2="370" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+        <line x1="278" y1="82"  x2="385" y2="255" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <line x1="278" y1="290" x2="385" y2="140" stroke="rgba(244,73,0,0.10)"   stroke-width="0.8"/>
+        <line x1="278" y1="370" x2="385" y2="255" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+        <!-- active path (orange) -->
+        <line x1="50"  y1="210" x2="152" y2="132" stroke="rgba(244,73,0,0.55)" stroke-width="2"/>
+        <line x1="50"  y1="210" x2="152" y2="216" stroke="rgba(244,73,0,0.45)" stroke-width="1.5"/>
+        <line x1="50"  y1="75"  x2="152" y2="132" stroke="rgba(244,73,0,0.30)" stroke-width="1.5"/>
+        <line x1="162" y1="132" x2="268" y2="180" stroke="rgba(244,73,0,0.68)" stroke-width="2.5"/>
+        <line x1="162" y1="216" x2="268" y2="180" stroke="rgba(244,73,0,0.55)" stroke-width="2"/>
+        <line x1="162" y1="132" x2="268" y2="82"  stroke="rgba(244,73,0,0.32)" stroke-width="1.5"/>
+        <line x1="162" y1="216" x2="268" y2="290" stroke="rgba(244,73,0,0.32)" stroke-width="1.5"/>
+        <line x1="268" y1="180" x2="385" y2="140" stroke="rgba(244,73,0,0.72)" stroke-width="2.5"/>
+        <line x1="268" y1="180" x2="385" y2="255" stroke="rgba(244,73,0,0.62)" stroke-width="2"/>
+        <line x1="268" y1="82"  x2="385" y2="140" stroke="rgba(244,73,0,0.35)" stroke-width="1.5"/>
+        <line x1="268" y1="290" x2="385" y2="255" stroke="rgba(244,73,0,0.40)" stroke-width="1.5"/>
+        <!-- input nodes -->
+        <circle cx="50" cy="75"  r="8"  fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <circle cx="50" cy="210" r="10" fill="rgba(244,73,0,0.22)"    stroke="rgba(244,73,0,0.55)"    stroke-width="2"/>
+        <circle cx="50" cy="345" r="8"  fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <!-- hidden layer 1 -->
+        <circle cx="155" cy="48"  r="7"  fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+        <circle cx="155" cy="132" r="12" fill="rgba(244,73,0,0.32)"    stroke="#F44900"                stroke-width="2"   class="nn-a" filter="url(#glow-sm)"/>
+        <circle cx="155" cy="216" r="11" fill="rgba(244,73,0,0.26)"    stroke="rgba(244,73,0,0.75)"    stroke-width="1.5" class="nn-b" filter="url(#glow-sm)"/>
+        <circle cx="155" cy="300" r="8"  fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+        <circle cx="155" cy="368" r="6"  fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <!-- hidden layer 2 -->
+        <circle cx="270" cy="82"  r="10" fill="rgba(244,73,0,0.22)" stroke="rgba(244,73,0,0.52)"   stroke-width="1.5" class="nn-c"/>
+        <circle cx="270" cy="180" r="15" fill="url(#node-hot)"       stroke="rgba(255,100,40,0.60)" stroke-width="3"   class="nn-a" filter="url(#glow-lg)"/>
+        <circle cx="270" cy="290" r="10" fill="rgba(244,73,0,0.20)" stroke="rgba(244,73,0,0.48)"   stroke-width="1.5" class="nn-b"/>
+        <circle cx="270" cy="370" r="7"  fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <!-- output nodes -->
+        <circle cx="390" cy="140" r="14" fill="url(#node-hot)" stroke="rgba(255,120,60,0.55)" stroke-width="3" class="nn-b" filter="url(#glow-lg)"/>
+        <circle cx="390" cy="255" r="14" fill="url(#node-hot)" stroke="rgba(255,120,60,0.55)" stroke-width="3" class="nn-a" filter="url(#glow-lg)"/>
+        <!-- labels -->
+        <text x="50"  y="398" text-anchor="middle" fill="rgba(255,255,255,0.20)" font-size="9" font-family="Inter Display,sans-serif" letter-spacing="0.08em">DATEN</text>
+        <text x="155" y="398" text-anchor="middle" fill="rgba(255,255,255,0.16)" font-size="9" font-family="Inter Display,sans-serif" letter-spacing="0.08em">ANALYSE</text>
+        <text x="270" y="398" text-anchor="middle" fill="rgba(244,73,0,0.50)"    font-size="9" font-family="Inter Display,sans-serif" letter-spacing="0.08em">KI-MODELL</text>
+        <text x="390" y="295" text-anchor="middle" fill="rgba(244,73,0,0.60)"    font-size="9" font-family="Inter Display,sans-serif" letter-spacing="0.08em">ERGEBNIS</text>
+      </svg>
     </div>
   </section>
 
-  <!-- SLIDE 2: Warum jetzt? -->
+  <!-- ══ SLIDE 2: Warum jetzt? — growth chart ══ -->
   <section class="slide dark" data-slide="1">
     <div class="watermark">WACHSTUMSCOACH · LUKAS EBNER · 2026</div>
     <div class="page-no">02</div>
@@ -287,9 +383,34 @@
       </div>
     </div>
     <p style="margin-top:20px; font-size:13px; opacity:.45;">* Bitkom Research 2024 / Deloitte KI-Monitor Deutschland</p>
+    <!-- Growth bar chart — subtle background -->
+    <div class="slide-visual" style="right:60px;top:60px;opacity:0.13;">
+      <svg width="320" height="260" viewBox="0 0 320 260" fill="none" aria-hidden="true">
+        <line x1="44" y1="20"  x2="44"  y2="220" stroke="white" stroke-width="0.8" opacity="0.5"/>
+        <line x1="44" y1="220" x2="310" y2="220" stroke="white" stroke-width="0.8" opacity="0.5"/>
+        <line x1="44" y1="170" x2="310" y2="170" stroke="white" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.4"/>
+        <line x1="44" y1="120" x2="310" y2="120" stroke="white" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.4"/>
+        <line x1="44" y1="70"  x2="310" y2="70"  stroke="white" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.4"/>
+        <text x="38" y="223" text-anchor="end" fill="white" opacity="0.6" font-size="9" font-family="Inter Display">0%</text>
+        <text x="38" y="173" text-anchor="end" fill="white" opacity="0.6" font-size="9" font-family="Inter Display">5%</text>
+        <text x="38" y="123" text-anchor="end" fill="white" opacity="0.6" font-size="9" font-family="Inter Display">10%</text>
+        <text x="38" y="73"  text-anchor="end" fill="white" opacity="0.6" font-size="9" font-family="Inter Display">15%</text>
+        <rect x="60"  y="180" width="32" height="40"  rx="4" fill="rgba(244,73,0,0.50)"/>
+        <rect x="110" y="150" width="32" height="70"  rx="4" fill="rgba(244,73,0,0.60)"/>
+        <rect x="160" y="120" width="32" height="100" rx="4" fill="rgba(244,73,0,0.72)"/>
+        <rect x="210" y="90"  width="32" height="130" rx="4" fill="rgba(244,73,0,0.85)"/>
+        <rect x="260" y="20"  width="32" height="200" rx="4" fill="#F44900"/>
+        <text x="76"  y="236" text-anchor="middle" fill="white" opacity="0.5" font-size="9" font-family="Inter Display">2020</text>
+        <text x="126" y="236" text-anchor="middle" fill="white" opacity="0.5" font-size="9" font-family="Inter Display">2021</text>
+        <text x="176" y="236" text-anchor="middle" fill="white" opacity="0.5" font-size="9" font-family="Inter Display">2022</text>
+        <text x="226" y="236" text-anchor="middle" fill="white" opacity="0.5" font-size="9" font-family="Inter Display">2023</text>
+        <text x="276" y="236" text-anchor="middle" fill="#F44900" opacity="0.95" font-size="9" font-family="Inter Display" font-weight="700">2024</text>
+        <polyline points="76,176 126,146 176,116 226,86 276,16" stroke="rgba(244,73,0,0.7)" stroke-width="1.5" fill="none" stroke-dasharray="5 3"/>
+      </svg>
+    </div>
   </section>
 
-  <!-- SLIDE 3: Die 3 typischen Fallen -->
+  <!-- ══ SLIDE 3: Die 3 typischen Fallen ══ -->
   <section class="slide light" data-slide="2">
     <div class="watermark">WACHSTUMSCOACH · LUKAS EBNER · 2026</div>
     <div class="page-no">03</div>
@@ -330,7 +451,7 @@
     </div>
   </section>
 
-  <!-- SLIDE 4: Lukas Ebner -->
+  <!-- ══ SLIDE 4: Lukas Ebner — profile with hex pattern ══ -->
   <section class="slide dark" data-slide="3">
     <div class="watermark">WACHSTUMSCOACH · LUKAS EBNER · 2026</div>
     <div class="page-no">04</div>
@@ -347,6 +468,18 @@
         </div>
       </div>
       <div class="profile-panel animate">
+        <!-- Decorative hexagonal grid + concentric rings inside panel -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:0.12;" viewBox="0 0 300 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <pattern id="hex-pat" x="0" y="0" width="52" height="60" patternUnits="userSpaceOnUse">
+              <polygon points="26,2 50,15 50,45 26,58 2,45 2,15" fill="none" stroke="rgba(244,73,0,0.9)" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <rect width="300" height="460" fill="url(#hex-pat)"/>
+          <circle cx="150" cy="95" r="55"  fill="none" stroke="rgba(244,73,0,0.7)" stroke-width="1.5"/>
+          <circle cx="150" cy="95" r="80"  fill="none" stroke="rgba(244,73,0,0.4)" stroke-width="1"/>
+          <circle cx="150" cy="95" r="108" fill="none" stroke="rgba(244,73,0,0.2)" stroke-width="0.8"/>
+        </svg>
         <div>
           <div class="profile-avatar">LE</div>
         </div>
@@ -380,7 +513,7 @@
     </div>
   </section>
 
-  <!-- SLIDE 5: Leistung 1 -->
+  <!-- ══ SLIDE 5: Leistung 1 ══ -->
   <section class="slide dark" data-slide="4">
     <div class="watermark">WACHSTUMSCOACH · LUKAS EBNER · 2026</div>
     <div class="page-no">05</div>
@@ -417,9 +550,25 @@
         </ul>
       </div>
     </div>
+    <!-- Roadmap step indicator -->
+    <div class="slide-visual" style="right:64px;bottom:68px;opacity:0.08;">
+      <svg width="280" height="60" viewBox="0 0 280 60" aria-hidden="true">
+        <circle cx="30"  cy="30" r="12" fill="#F44900"/>
+        <line x1="42"  y1="30" x2="88"  y2="30" stroke="#F44900" stroke-width="2" stroke-dasharray="5 3"/>
+        <circle cx="100" cy="30" r="12" fill="#F44900" opacity="0.7"/>
+        <line x1="112" y1="30" x2="158" y2="30" stroke="#F44900" stroke-width="2" stroke-dasharray="5 3"/>
+        <circle cx="170" cy="30" r="12" fill="#F44900" opacity="0.5"/>
+        <line x1="182" y1="30" x2="228" y2="30" stroke="#F44900" stroke-width="2" stroke-dasharray="5 3"/>
+        <circle cx="240" cy="30" r="12" fill="#F44900" opacity="0.3"/>
+        <text x="30"  y="34" text-anchor="middle" fill="white" font-size="10" font-family="Inter Display">1</text>
+        <text x="100" y="34" text-anchor="middle" fill="white" font-size="10" font-family="Inter Display">2</text>
+        <text x="170" y="34" text-anchor="middle" fill="white" font-size="10" font-family="Inter Display">3</text>
+        <text x="240" y="34" text-anchor="middle" fill="white" font-size="10" font-family="Inter Display">4</text>
+      </svg>
+    </div>
   </section>
 
-  <!-- SLIDE 6: Leistung 2 -->
+  <!-- ══ SLIDE 6: Leistung 2 ══ -->
   <section class="slide dark" data-slide="5">
     <div class="watermark">WACHSTUMSCOACH · LUKAS EBNER · 2026</div>
     <div class="page-no">06</div>
@@ -459,9 +608,18 @@
         </ul>
       </div>
     </div>
+    <!-- Sprint cycle decoration -->
+    <div class="slide-visual" style="right:60px;bottom:60px;opacity:0.07;">
+      <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#F44900" stroke-width="3" stroke-dasharray="14 8"/>
+        <circle cx="60" cy="60" r="36" fill="none" stroke="#F44900" stroke-width="2" stroke-dasharray="9 5"/>
+        <circle cx="60" cy="60" r="18" fill="#F44900" opacity="0.5"/>
+        <path d="M60 8 L68 20 L52 20 Z" fill="#F44900"/>
+      </svg>
+    </div>
   </section>
 
-  <!-- SLIDE 7: Leistung 3 -->
+  <!-- ══ SLIDE 7: Leistung 3 ══ -->
   <section class="slide light" data-slide="6">
     <div class="watermark">WACHSTUMSCOACH · LUKAS EBNER · 2026</div>
     <div class="page-no">07</div>
@@ -504,7 +662,7 @@
     </div>
   </section>
 
-  <!-- SLIDE 8: Leistung 4 -->
+  <!-- ══ SLIDE 8: Leistung 4 — shield illustration ══ -->
   <section class="slide dark" data-slide="7">
     <div class="watermark">WACHSTUMSCOACH · LUKAS EBNER · 2026</div>
     <div class="page-no">08</div>
@@ -541,9 +699,17 @@
         </ul>
       </div>
     </div>
+    <!-- Shield illustration -->
+    <div class="slide-visual" style="right:56px;bottom:52px;opacity:0.08;">
+      <svg width="100" height="120" viewBox="0 0 100 120" aria-hidden="true">
+        <path d="M50 4 L92 20 L92 58 C92 82 72 102 50 116 C28 102 8 82 8 58 L8 20 Z" fill="none" stroke="#F44900" stroke-width="3"/>
+        <path d="M50 18 L80 30 L80 58 C80 75 66 90 50 100 C34 90 20 75 20 58 L20 30 Z" fill="rgba(244,73,0,0.15)" stroke="#F44900" stroke-width="1.5"/>
+        <polyline points="33,58 44,70 67,46" stroke="#F44900" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
   </section>
 
-  <!-- SLIDE 9: Warum Lukas Ebner -->
+  <!-- ══ SLIDE 9: Warum Lukas Ebner? ══ -->
   <section class="slide dark" data-slide="8">
     <div class="watermark">WACHSTUMSCOACH · LUKAS EBNER · 2026</div>
     <div class="page-no">09</div>
@@ -573,35 +739,105 @@
     </div>
   </section>
 
-  <!-- SLIDE 10: Call to Action -->
+  <!-- ══ SLIDE 10: CTA — calendar illustration ══ -->
   <section class="slide dark cta-slide" data-slide="9">
     <div class="watermark">WACHSTUMSCOACH · LUKAS EBNER · 2026</div>
     <div class="page-no">10</div>
-    <div class="label animate">Der nächste Schritt</div>
-    <div class="display animate" style="font-size:68px; max-width:900px;">Starten Sie mit<span class="lbr"><span class="accent">einem Gespräch.</span></span></div>
-    <p class="lead animate">30 Minuten. Kostenlos. Kein Pitch — sondern ein ehrliches Bild, ob und wie KI in Ihrem Unternehmen wirken kann.</p>
-    <div class="cta-block animate">
-      <div class="cta-btn">Erstgespräch vereinbaren →</div>
-      <div class="cta-contacts">
-        <div class="cta-contact">
-          <div>
-            <div class="cta-label">Web</div>
-            <div class="cta-val">wachstumscoach.at</div>
+
+    <div class="cta-content">
+      <div class="label animate">Der nächste Schritt</div>
+      <div class="display animate" style="font-size:68px; max-width:900px;">Starten Sie mit<span class="lbr"><span class="accent">einem Gespräch.</span></span></div>
+      <p class="lead animate">30 Minuten. Kostenlos. Kein Pitch — sondern ein ehrliches Bild, ob und wie KI in Ihrem Unternehmen wirken kann.</p>
+      <div class="cta-block animate">
+        <div class="cta-btn">Erstgespräch vereinbaren →</div>
+        <div class="cta-contacts">
+          <div class="cta-contact">
+            <div>
+              <div class="cta-label">Web</div>
+              <div class="cta-val">wachstumscoach.at</div>
+            </div>
           </div>
-        </div>
-        <div class="cta-contact">
-          <div>
-            <div class="cta-label">E-Mail</div>
-            <div class="cta-val">lukas@wachstumscoach.at</div>
+          <div class="cta-contact">
+            <div>
+              <div class="cta-label">E-Mail</div>
+              <div class="cta-val">lukas@wachstumscoach.at</div>
+            </div>
           </div>
-        </div>
-        <div class="cta-contact">
-          <div>
-            <div class="cta-label">LinkedIn</div>
-            <div class="cta-val">linkedin.com/in/lukas-ebner</div>
+          <div class="cta-contact">
+            <div>
+              <div class="cta-label">LinkedIn</div>
+              <div class="cta-val">linkedin.com/in/lukas-ebner</div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Calendar illustration -->
+    <div class="slide-visual" style="right:3%;top:50%;transform:translateY(-50%);width:30%;max-width:360px;opacity:0.92;">
+      <svg width="340" height="340" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <filter id="cal-shadow" x="-10%" y="-10%" width="120%" height="130%">
+            <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="rgba(0,0,0,0.35)"/>
+          </filter>
+        </defs>
+        <!-- card -->
+        <rect x="16" y="24" width="308" height="298" rx="22" fill="rgba(25,23,24,0.9)" stroke="rgba(244,73,0,0.22)" stroke-width="1.5" filter="url(#cal-shadow)"/>
+        <!-- header -->
+        <rect x="16" y="24" width="308" height="64" rx="22" fill="rgba(244,73,0,0.18)"/>
+        <rect x="16" y="64" width="308" height="24" fill="rgba(244,73,0,0.18)"/>
+        <!-- decorative rings -->
+        <circle cx="52"  cy="56" r="18" fill="none" stroke="rgba(244,73,0,0.30)" stroke-width="2"/>
+        <circle cx="52"  cy="56" r="10" fill="rgba(244,73,0,0.15)"/>
+        <circle cx="288" cy="56" r="18" fill="none" stroke="rgba(244,73,0,0.30)" stroke-width="2"/>
+        <circle cx="288" cy="56" r="10" fill="rgba(244,73,0,0.15)"/>
+        <!-- month label -->
+        <text x="170" y="63" text-anchor="middle" fill="rgba(255,255,255,0.92)" font-size="18" font-family="Degular Display,Inter Display,sans-serif" letter-spacing="-0.01em">Juni 2026</text>
+        <!-- day headers -->
+        <text x="64"  y="108" text-anchor="middle" fill="rgba(255,255,255,0.32)" font-size="11" font-family="Inter Display,sans-serif" letter-spacing="0.05em">MO</text>
+        <text x="106" y="108" text-anchor="middle" fill="rgba(255,255,255,0.32)" font-size="11" font-family="Inter Display,sans-serif" letter-spacing="0.05em">DI</text>
+        <text x="148" y="108" text-anchor="middle" fill="rgba(255,255,255,0.32)" font-size="11" font-family="Inter Display,sans-serif" letter-spacing="0.05em">MI</text>
+        <text x="190" y="108" text-anchor="middle" fill="rgba(255,255,255,0.32)" font-size="11" font-family="Inter Display,sans-serif" letter-spacing="0.05em">DO</text>
+        <text x="232" y="108" text-anchor="middle" fill="rgba(255,255,255,0.32)" font-size="11" font-family="Inter Display,sans-serif" letter-spacing="0.05em">FR</text>
+        <text x="274" y="108" text-anchor="middle" fill="rgba(244,73,0,0.55)"    font-size="11" font-family="Inter Display,sans-serif" letter-spacing="0.05em">SA</text>
+        <text x="316" y="108" text-anchor="middle" fill="rgba(244,73,0,0.55)"    font-size="11" font-family="Inter Display,sans-serif" letter-spacing="0.05em">SO</text>
+        <line x1="32" y1="116" x2="324" y2="116" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+        <!-- week 1 -->
+        <text x="64"  y="143" text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="14" font-family="Inter Display">1</text>
+        <text x="106" y="143" text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="14" font-family="Inter Display">2</text>
+        <text x="148" y="143" text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="14" font-family="Inter Display">3</text>
+        <text x="190" y="143" text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="14" font-family="Inter Display">4</text>
+        <text x="232" y="143" text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="14" font-family="Inter Display">5</text>
+        <text x="274" y="143" text-anchor="middle" fill="rgba(255,255,255,0.30)" font-size="14" font-family="Inter Display">6</text>
+        <text x="316" y="143" text-anchor="middle" fill="rgba(255,255,255,0.30)" font-size="14" font-family="Inter Display">7</text>
+        <!-- week 2 -->
+        <text x="64"  y="183" text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="14" font-family="Inter Display">8</text>
+        <text x="106" y="183" text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="14" font-family="Inter Display">9</text>
+        <text x="148" y="183" text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="14" font-family="Inter Display">10</text>
+        <!-- highlighted: Thursday June 11 -->
+        <rect x="171" y="165" width="36" height="28" rx="9" fill="#F44900"/>
+        <text x="190" y="184" text-anchor="middle" fill="white" font-size="14" font-family="Inter Display" font-weight="700">11</text>
+        <text x="232" y="183" text-anchor="middle" fill="rgba(255,255,255,0.50)" font-size="14" font-family="Inter Display">12</text>
+        <text x="274" y="183" text-anchor="middle" fill="rgba(255,255,255,0.30)" font-size="14" font-family="Inter Display">13</text>
+        <text x="316" y="183" text-anchor="middle" fill="rgba(255,255,255,0.30)" font-size="14" font-family="Inter Display">14</text>
+        <!-- week 3 -->
+        <text x="64"  y="222" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="14" font-family="Inter Display">15</text>
+        <text x="106" y="222" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="14" font-family="Inter Display">16</text>
+        <text x="148" y="222" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="14" font-family="Inter Display">17</text>
+        <text x="190" y="222" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="14" font-family="Inter Display">18</text>
+        <text x="232" y="222" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="14" font-family="Inter Display">19</text>
+        <text x="274" y="222" text-anchor="middle" fill="rgba(255,255,255,0.20)" font-size="14" font-family="Inter Display">20</text>
+        <text x="316" y="222" text-anchor="middle" fill="rgba(255,255,255,0.20)" font-size="14" font-family="Inter Display">21</text>
+        <!-- week 4 (dimmed) -->
+        <text x="64"  y="261" text-anchor="middle" fill="rgba(255,255,255,0.20)" font-size="14" font-family="Inter Display">22</text>
+        <text x="106" y="261" text-anchor="middle" fill="rgba(255,255,255,0.20)" font-size="14" font-family="Inter Display">23</text>
+        <text x="148" y="261" text-anchor="middle" fill="rgba(255,255,255,0.20)" font-size="14" font-family="Inter Display">24</text>
+        <text x="190" y="261" text-anchor="middle" fill="rgba(255,255,255,0.20)" font-size="14" font-family="Inter Display">25</text>
+        <text x="232" y="261" text-anchor="middle" fill="rgba(255,255,255,0.20)" font-size="14" font-family="Inter Display">26</text>
+        <!-- footer pill -->
+        <rect x="32" y="286" width="276" height="26" rx="13" fill="rgba(244,73,0,0.18)" stroke="rgba(244,73,0,0.35)" stroke-width="1"/>
+        <text x="170" y="303" text-anchor="middle" fill="rgba(244,73,0,0.92)" font-size="11" font-family="Inter Display,sans-serif" letter-spacing="0.05em">30 MIN · KOSTENLOS · ONLINE</text>
+      </svg>
     </div>
   </section>
 
